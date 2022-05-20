@@ -7,8 +7,8 @@ const ProductPage = () => {
   return (
     <Container>
       <Content>
-        <VStack w="100%" h="500px" bgColor="blue.500" />
-        <VStack w="100%" h="500px" bgColor="blue.500" />
+        <VStack w="100%" h="70vh" />
+        <VStack w="100%" h="70vh" />
       </Content>
     </Container>
   );
