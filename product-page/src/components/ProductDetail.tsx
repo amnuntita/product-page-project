@@ -1,21 +1,42 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 
 import { VStack, HStack, Text } from "@chakra-ui/layout";
 import { Badge } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { Button } from "@chakra-ui/button";
 
-const ProductDetail = () => {
+import { useCart } from "../context/Cart";
+import { addItem } from "../context/cartReducer";
+
+interface ProductDetailProps {
+  productID: string;
+  productName: string;
+  price: number;
+  discount: number;
+  seller: string;
+  thumbnail?: string;
+}
+
+const ProductDetail: FC<ProductDetailProps> = ({
+  productID,
+  productName,
+  seller,
+  price,
+  discount,
+  thumbnail,
+}) => {
   const [amount, setAmount] = useState(0);
+  const { dispatch } = useCart();
 
   const renderTitle = () => {
     return (
       <VStack spacing="1" alignItems="start" mb="2">
         <Text fontSize="lg" fontWeight="bold">
-          Sneaker Company
+          {productName}
         </Text>
         <Text fontSize="4xl" fontWeight="extrabold">
-          Fall Limited Edition Sneaker
+          {seller}
         </Text>
       </VStack>
     );
@@ -38,13 +59,36 @@ const ProductDetail = () => {
     return (
       <VStack spacing="0.5" alignItems="start">
         <HStack spacing="4">
-          <Text fontSize="3xl">$125.00</Text>
-          <Badge fontSize="lg">50%</Badge>
+          <Text fontSize="3xl">${price * (1 - discount)}</Text>
+          <Badge fontSize="lg">{discount * 100}%</Badge>
         </HStack>
         <Text as="s" fontSize="lg">
-          $250.00
+          ${price}
         </Text>
       </VStack>
+    );
+  };
+
+  const renderCartButton = () => {
+    const add = () => {
+      if (amount > 0) {
+        dispatch(
+          addItem({
+            itemID: productID,
+            itemName: productName,
+            price: price,
+            amount: amount,
+            thumbnail: thumbnail ?? "",
+          })
+        );
+      }
+    };
+
+    return (
+      <Button onClick={add}>
+        <Image src="/images/icon-cart.svg" />
+        <Text fontSize="md">Add To Cart</Text>
+      </Button>
     );
   };
 
@@ -79,30 +123,6 @@ const ProductDetail = () => {
     );
   };
 
-  const renderAddToCartButton = () => {
-    return (
-      <HStack
-        w="56"
-        h="100%"
-        bgColor="blackAlpha.200"
-        borderRadius="0.5rem"
-        justifyContent="center"
-      >
-        <Image src="/images/icon-cart.svg" />
-        <Text fontSize="md">Add To Cart</Text>
-      </HStack>
-    );
-  };
-
-  const renderButtons = () => {
-    return (
-      <HStack h="12" spacing="6">
-        {renderAmountButton()}
-        {renderAddToCartButton()}
-      </HStack>
-    );
-  };
-
   return (
     <VStack
       w="100%"
@@ -114,7 +134,10 @@ const ProductDetail = () => {
       {renderTitle()}
       {renderDescription()}
       {renderPrice()}
-      {renderButtons()}
+      <HStack h="12" spacing="6">
+        {renderAmountButton()}
+        {renderCartButton()}
+      </HStack>
     </VStack>
   );
 };

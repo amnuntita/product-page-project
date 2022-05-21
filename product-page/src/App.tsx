@@ -3,8 +3,12 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 
 import ProductPage from "./pages/product";
 
+import { CartProvider } from "./context/Cart";
+
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <ProductPage />
+    <CartProvider>
+      <ProductPage />
+    </CartProvider>
   </ChakraProvider>
 );
