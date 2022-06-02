@@ -49,12 +49,13 @@ const CartBox = () => {
       borderRadius="0.5rem"
       border="1px solid #E2E8F0"
       boxShadow="rgba(0, 0, 0, 0.25) 0px 5px 15px"
-      w="80"
-      minH="56"
-      right="0"
+      w={["95vw", "80"]}
+      h="fit-content"
+      marginX="auto"
+      right={["2.5vw", "2"]}
       bottom="0"
-      top="12"
-      zIndex="2"
+      top="24"
+      zIndex="4"
       pos="absolute"
       spacing="4"
       px="4"
@@ -64,16 +65,20 @@ const CartBox = () => {
         <Text fontWeight="bold">Cart</Text>
       </VStack>
       <Divider />
-      <VStack w="100%" flexGrow="4" spacing="3" justify="flex-start">
-        {state.items.length > 0 ? (
-          state.items.map((i) =>
+
+      {state.items.length > 0 ? (
+        <VStack w="100%" minH="36" spacing="3" justify="flex-start" py="2">
+          {state.items.map((i) =>
             renderItem(i.thumbnail, i.itemName, i.amount, i.price, i.itemID)
-          )
-        ) : (
+          )}
+
+          <Button w="100%">Checkout</Button>
+        </VStack>
+      ) : (
+        <VStack w="100%" minH="36" spacing="3" justify="center">
           <Text>Your cart is empty</Text>
-        )}
-        <Button w="100%">Checkout</Button>
-      </VStack>
+        </VStack>
+      )}
     </VStack>
   );
 };
