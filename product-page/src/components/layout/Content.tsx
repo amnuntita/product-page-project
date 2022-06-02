@@ -6,9 +6,10 @@ const Content: FC = ({ children }) => {
   return (
     <Stack
       direction={["column", "row"]}
-      spacing={["4", "24"]}
+      spacing={["10", "24"]}
       w="100%"
       h="100%"
+      margin="0"
     >
       {children}
     </Stack>

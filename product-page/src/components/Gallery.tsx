@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
 import { VStack, Box, HStack, Text, Flex } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/react";
+import { Image, useMediaQuery } from "@chakra-ui/react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -14,6 +14,7 @@ export interface GalleryProps {
 
 const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
   const [largeImgIdx, setLargeImgIdx] = useState(0);
+  const [isMobile] = useMediaQuery("(max-width: 500px)");
 
   const renderLargeImage = () => {
     const arrow = (dir: "left" | "right") => {
@@ -22,12 +23,12 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
           boxSize="40px"
           borderRadius="99px"
           bgColor="white"
-          zIndex="4"
+          zIndex="2"
           justifyContent="center"
           alignItems="center"
           position="absolute"
-          left={dir === "left" ? "-2" : "auto"}
-          right={dir === "left" ? "auto" : "-2"}
+          left={dir === "left" ? "0" : "auto"}
+          right={dir === "left" ? "auto" : "0"}
           cursor="pointer"
           onClick={() => {
             if (dir === "left" && largeImgIdx > 0) {
@@ -70,7 +71,12 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
 
   const renderThumbnails = () => {
     return (
-      <HStack justifyContent="space-between" h="20%" w="100%">
+      <HStack
+        justifyContent="space-between"
+        h="20%"
+        w="100%"
+        display={["none", "flex"]}
+      >
         {imageList.map((img, idx) => {
           const activeStyle =
             idx === largeImgIdx
@@ -101,11 +107,12 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
       ) : (
         <Image
           src={imageList[largeImgIdx]}
-          h="70%"
-          borderRadius="16px"
-          cursor={openLightbox ? "pointer" : "default"}
+          h={["auto", "70%"]}
+          objectFit="contain"
+          borderRadius={["0", "16px"]}
+          cursor={openLightbox && !isMobile ? "pointer" : "default"}
           onClick={() => {
-            if (openLightbox) {
+            if (openLightbox && !isMobile) {
               openLightbox(imageList);
             }
           }}

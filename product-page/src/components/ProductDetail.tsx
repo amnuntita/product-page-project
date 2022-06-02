@@ -33,10 +33,10 @@ const ProductDetail: FC<ProductDetailProps> = ({
     return (
       <VStack spacing="1" alignItems="start" mb="2">
         <Text fontSize="lg" fontWeight="bold">
-          {productName}
+          {seller}
         </Text>
         <Text fontSize="4xl" fontWeight="extrabold">
-          {seller}
+          {productName}
         </Text>
       </VStack>
     );
@@ -126,10 +126,12 @@ const ProductDetail: FC<ProductDetailProps> = ({
   return (
     <VStack
       w="100%"
-      h="70vh"
-      justifyContent="center"
+      h={["fit-content", "70vh"]}
+      justifyContent={["flex-start", "center"]}
       alignItems="start"
       spacing="4"
+      px={["3", "0"]}
+      pb="4"
     >
       {renderTitle()}
       {renderDescription()}
