@@ -1838,6 +1838,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/kumbh-sans@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/kumbh-sans/-/kumbh-sans-4.5.9.tgz#73acb04f195f6175eb1e42020f42b00ec57a0584"
+  integrity sha512-kyRjQ9Slhyrjecx8xLMkRULvi9azx3K8RmnqyAOPiA6/+czpfsO1VK/dFmwn9l58HLLD3oaEThIRPoXl2pRYNA==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.5"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.5.tgz#2cbaf9a89460da24b5ca6531b8bbfc23e1df50c7"

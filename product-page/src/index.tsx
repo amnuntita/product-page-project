@@ -5,6 +5,8 @@ import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
 import * as serviceWorker from "./serviceWorker";
 
+import "@fontsource/kumbh-sans";
+
 const container = document.getElementById("root") as Element;
 const root = ReactDOM.createRoot(container);
 

@@ -1,10 +1,11 @@
 import { useState, FC } from "react";
 
-import { VStack, HStack, Text } from "@chakra-ui/layout";
+import { VStack, HStack, Text, Box } from "@chakra-ui/layout";
 import { Badge } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/image";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Button } from "@chakra-ui/button";
+
+import Button from "../components/AppButton";
 
 import { useCart } from "../context/Cart";
 import { addItem } from "../context/cartReducer";
@@ -31,11 +32,11 @@ const ProductDetail: FC<ProductDetailProps> = ({
 
   const renderTitle = () => {
     return (
-      <VStack spacing="1" alignItems="start" mb="2">
-        <Text fontSize="lg" fontWeight="bold">
-          {seller}
+      <VStack spacing="4" alignItems="start" mb="2">
+        <Text fontSize="md" fontWeight="700" color="orange">
+          {seller.toUpperCase()}
         </Text>
-        <Text fontSize="4xl" fontWeight="extrabold">
+        <Text fontSize="5xl" fontWeight="700" lineHeight="1" color="black">
           {productName}
         </Text>
       </VStack>
@@ -59,8 +60,20 @@ const ProductDetail: FC<ProductDetailProps> = ({
     return (
       <VStack spacing="0.5" alignItems="start">
         <HStack spacing="4">
-          <Text fontSize="3xl">${price * (1 - discount)}</Text>
-          <Badge fontSize="lg">{discount * 100}%</Badge>
+          <Text fontSize="3xl" color="black">
+            ${price * (1 - discount)}
+          </Text>
+          <Badge
+            fontSize="md"
+            fontWeight="700"
+            bgColor="paleorange"
+            color="orange"
+            px="2"
+            py="0.5"
+            borderRadius="0.5rem"
+          >
+            {discount * 100}%
+          </Badge>
         </HStack>
         <Text as="s" fontSize="lg">
           ${price}
@@ -85,10 +98,12 @@ const ProductDetail: FC<ProductDetailProps> = ({
     };
 
     return (
-      <Button onClick={add}>
-        <Image src="/images/icon-cart.svg" />
-        <Text fontSize="md">Add To Cart</Text>
-      </Button>
+      <Box w="56" h="100%">
+        <Button onClick={add} h="100%">
+          <Image src="/images/icon-cart.svg" />
+          <Text>Add To Cart</Text>
+        </Button>
+      </Box>
     );
   };
 
@@ -101,10 +116,10 @@ const ProductDetail: FC<ProductDetailProps> = ({
         py="4"
         h="100%"
         w="36"
-        borderRadius="4px"
-        bgColor="blackAlpha.300"
-        fontSize="xl"
-        fontWeight="bold"
+        borderRadius="8px"
+        bgColor="grayishblue.100"
+        fontSize="md"
+        fontWeight="extrabold"
       >
         <MinusIcon
           cursor="pointer"
@@ -113,11 +128,13 @@ const ProductDetail: FC<ProductDetailProps> = ({
               setAmount((prev) => prev - 1);
             }
           }}
+          color="orange"
         />
         <Text>{amount}</Text>
         <AddIcon
           cursor="pointer"
           onClick={() => setAmount((prev) => prev + 1)}
+          color="orange"
         />
       </HStack>
     );

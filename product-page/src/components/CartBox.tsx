@@ -1,6 +1,7 @@
-import { VStack, Text, Divider, HStack } from "@chakra-ui/layout";
+import { VStack, Text, Divider, HStack, Box } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
-import { Button } from "@chakra-ui/button";
+
+import Button from "../components/AppButton";
 
 import { useCart } from "../context/Cart";
 import { removeItem } from "../context/cartReducer";
@@ -72,7 +73,11 @@ const CartBox = () => {
             renderItem(i.thumbnail, i.itemName, i.amount, i.price, i.itemID)
           )}
 
-          <Button w="100%">Checkout</Button>
+          <Box h="10" w="100%">
+            <Button w="100%">
+              <Text>Checkout</Text>
+            </Button>
+          </Box>
         </VStack>
       ) : (
         <VStack w="100%" minH="36" spacing="3" justify="center">

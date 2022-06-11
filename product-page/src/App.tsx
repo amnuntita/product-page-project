@@ -1,7 +1,8 @@
 import * as React from "react";
-import { ChakraProvider, theme } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 
 import ProductPage from "./pages/product";
+import theme from "./theme";
 
 import { CartProvider } from "./context/Cart";
 
