@@ -1,7 +1,7 @@
 import { useReducer, useCallback } from "react";
 import { CartItem, CartState } from "./Cart";
 
-const initialState: CartState = { items: [] };
+const initialState: CartState = { items: [], totalAmount: 0 };
 
 enum ActionType {
   ADD_TO_CART = "add_to_cart",
@@ -30,7 +30,10 @@ export const cartReducer = (
     const itemIndex = items.findIndex(
       (i) => i.itemID === action.payload.itemID
     );
+    const totalAmount = state.totalAmount + action.payload.amount;
     const hasItem = itemIndex !== -1;
+
+    console.log(totalAmount);
 
     if (hasItem) {
       const updatedItems = { ...items[itemIndex] };
@@ -39,10 +42,12 @@ export const cartReducer = (
 
       return {
         items: items,
+        totalAmount: totalAmount,
       };
     } else {
       return {
         items: [...state.items, action.payload],
+        totalAmount: totalAmount,
       };
     }
   } else if (action.type === ActionType.REMOVE_FROM_CART) {
@@ -50,10 +55,13 @@ export const cartReducer = (
     const items = [...state.items];
     const removeIndex = items.findIndex((i) => i.itemID === itemID);
 
+    const totalAmount = state.totalAmount - items[removeIndex].amount;
+
     items.splice(removeIndex);
 
     return {
       items: items,
+      totalAmount: totalAmount,
     };
   }
   return state;

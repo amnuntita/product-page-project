@@ -11,9 +11,10 @@ export interface CartItem {
 
 export interface CartState {
   items: CartItem[];
+  totalAmount: number;
 }
 
-const initialCartState = { items: [] };
+const initialCartState = { items: [], totalAmount: 0 };
 const CartContext = React.createContext<{
   state: CartState;
   dispatch: React.Dispatch<any>;
