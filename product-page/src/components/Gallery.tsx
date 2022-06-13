@@ -10,9 +10,15 @@ export interface GalleryProps {
   openLightbox?: (imgList: string[]) => void;
   h?: string;
   showArrow?: boolean;
+  isLightbox?: boolean;
 }
 
-const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
+const Gallery: FC<GalleryProps> = ({
+  imageList,
+  openLightbox,
+  isLightbox = false,
+  ...props
+}) => {
   const [largeImgIdx, setLargeImgIdx] = useState(0);
   const [isMobile] = useMediaQuery("(max-width: 500px)");
 
@@ -51,11 +57,11 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
 
     if (props.showArrow) {
       return (
-        <HStack w="100%" gridColumn="1/-1" gridRow="1/2" pos="relative">
+        <HStack w="100%" pos="relative">
           {arrow("left")}
           <Image
             src={imageList[largeImgIdx]}
-            h="100%"
+            w="100%"
             objectFit="contain"
             borderRadius="16px"
             cursor={openLightbox ? "pointer" : "default"}
@@ -70,64 +76,73 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
       );
     } else {
       return (
-        <Box gridColumn="1/-1" gridRow="1/2" h="100%" bgColor="green">
-          <Image
-            h="100%"
-            src={imageList[largeImgIdx]}
-            objectFit="contain"
-            borderRadius={["0", "16px"]}
-            cursor={openLightbox && !isMobile ? "pointer" : "default"}
-            onClick={() => {
-              if (openLightbox && !isMobile) {
-                openLightbox(imageList);
-              }
-            }}
-          />
-        </Box>
+        <Image
+          w="100%"
+          src={imageList[largeImgIdx]}
+          objectFit="contain"
+          borderRadius={["0", "16px"]}
+          cursor={openLightbox && !isMobile ? "pointer" : "default"}
+          onClick={() => {
+            if (openLightbox && !isMobile) {
+              openLightbox(imageList);
+            }
+          }}
+        />
       );
     }
   };
 
   const renderThumbnails = () => {
-    return imageList.map((img, idx) => {
-      const activeStyle =
-        idx === largeImgIdx
-          ? {
-              border: "3px solid orange",
-              opacity: "0.5",
-            }
-          : {};
-      return (
-        <Image
-          gridColumn={`${idx + 1}/${idx + 2}`}
-          gridRowStart="3"
-          key={img}
-          src={img}
-          borderRadius="8px"
-          cursor="pointer"
-          onClick={() => setLargeImgIdx(idx)}
-          boxSizing="border-box"
-          {...activeStyle}
-        />
-      );
-    });
+    return (
+      <HStack w="100%" spacing="4">
+        {" "}
+        {imageList.map((img, idx) => {
+          const activeStyle =
+            idx === largeImgIdx
+              ? {
+                  border: "3px solid orange",
+                  opacity: "0.5",
+                }
+              : {};
+          return (
+            <Box>
+              <Image
+                key={img}
+                src={img}
+                borderRadius="8px"
+                cursor="pointer"
+                onClick={() => setLargeImgIdx(idx)}
+                boxSizing="border-box"
+                {...activeStyle}
+              />
+            </Box>
+          );
+        })}
+      </HStack>
+    );
   };
+
+  const containerStyle = isLightbox
+    ? {}
+    : {
+        h: "100%",
+        bgColor: "red",
+        alignContent: "center",
+      };
 
   return (
     // <VStack w="fit-content" spacing="4" h={props.h ?? "100%"} bgColor="red.100">
     //   {renderLargeImage()}
     //   {renderThumbnails()}
     // </VStack>
-    <VStack h={["auto", "100%"]} bgColor="red" alignContent="center">
-      <Grid
-        boxSize={["100%", "80%"]}
-        gridTemplateColumns="repeat(4,1fr)"
-        gridRowGap="4"
-        gridColumnGap="5"
-      >
-        {renderLargeImage()}
-        {!isMobile && renderThumbnails()}
-      </Grid>
+    <VStack
+      boxSize={["100%", "70%"]}
+      alignContent="center"
+      h={props.h ?? "100%"}
+      bgColor="red"
+    >
+      {renderLargeImage()}
+      {!isMobile && renderThumbnails()}
     </VStack>
   );
 };
