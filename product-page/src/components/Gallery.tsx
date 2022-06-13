@@ -57,8 +57,7 @@ const Gallery: FC<GalleryProps> = ({
 
     if (props.showArrow) {
       return (
-        <HStack w="100%" pos="relative">
-          {arrow("left")}
+        <HStack w={isLightbox ? "90%" : "100%"} pos="relative">
           <Image
             src={imageList[largeImgIdx]}
             w="100%"
@@ -71,7 +70,6 @@ const Gallery: FC<GalleryProps> = ({
               }
             }}
           />
-          {arrow("right")}
         </HStack>
       );
     } else {
@@ -94,7 +92,7 @@ const Gallery: FC<GalleryProps> = ({
 
   const renderThumbnails = () => {
     return (
-      <HStack w="100%" spacing="4">
+      <HStack w={isLightbox ? "70%" : "100%"} spacing="4">
         {" "}
         {imageList.map((img, idx) => {
           const activeStyle =
@@ -122,14 +120,6 @@ const Gallery: FC<GalleryProps> = ({
     );
   };
 
-  const containerStyle = isLightbox
-    ? {}
-    : {
-        h: "100%",
-        bgColor: "red",
-        alignContent: "center",
-      };
-
   return (
     // <VStack w="fit-content" spacing="4" h={props.h ?? "100%"} bgColor="red.100">
     //   {renderLargeImage()}
@@ -139,7 +129,6 @@ const Gallery: FC<GalleryProps> = ({
       boxSize={["100%", "70%"]}
       alignContent="center"
       h={props.h ?? "100%"}
-      bgColor="red"
     >
       {renderLargeImage()}
       {!isMobile && renderThumbnails()}

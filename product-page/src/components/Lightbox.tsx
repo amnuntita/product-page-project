@@ -16,8 +16,6 @@ const Lightbox: FC<LightboxProps> = ({ isShowing, close, imageList }) => {
     return (
       <VStack
         position="fixed"
-        width="100%"
-        h="100%"
         top="0"
         left="0"
         right="0"
@@ -26,17 +24,20 @@ const Lightbox: FC<LightboxProps> = ({ isShowing, close, imageList }) => {
         backgroundColor="rgba(0,0,0,0.8)"
         zIndex="2"
         alignItems="center"
-        justifyItems="start"
+        justifyContent="center"
+        w="100%"
+        h="100%"
       >
-        <VStack h="100%" justifyContent="center" spacing="4">
-          <CloseIcon
-            color="white"
-            cursor="pointer"
-            onClick={() => close()}
-            marginLeft="auto"
-            mr="0"
-          />
-          <Gallery imageList={imageList} h="80vh" showArrow={true} />
+        <VStack justifyContent="center" boxSize="100%" spacing="4">
+          <VStack w="50%" h="100%" justifyContent="center">
+            <CloseIcon
+              color="white"
+              cursor="pointer"
+              onClick={() => close()}
+              marginLeft="60%"
+            />
+            <Gallery imageList={imageList} showArrow={true} isLightbox={true} />
+          </VStack>
         </VStack>
       </VStack>
     );
