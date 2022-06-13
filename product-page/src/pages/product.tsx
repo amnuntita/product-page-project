@@ -34,7 +34,7 @@ const ProductPage = () => {
     <>
       <Container>
         <Content>
-          <VStack w="100%" h={["auto", "70vh"]} alignContent="center">
+          <VStack w="100%" alignContent="center">
             {isMobile ? (
               <Gallery imageList={images} showArrow={true} />
             ) : (

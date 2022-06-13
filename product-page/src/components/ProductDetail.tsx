@@ -33,10 +33,19 @@ const ProductDetail: FC<ProductDetailProps> = ({
   const renderTitle = () => {
     return (
       <VStack spacing="4" alignItems="start" mb="2">
-        <Text fontSize="md" fontWeight="700" color="orange">
+        <Text
+          fontSize={["sm", "sm", "sm", "md"]}
+          fontWeight="700"
+          color="orange"
+        >
           {seller.toUpperCase()}
         </Text>
-        <Text fontSize="5xl" fontWeight="700" lineHeight="1" color="black">
+        <Text
+          fontSize={["3xl", "3xl", "3xl", "5xl", "5xl"]}
+          fontWeight="700"
+          lineHeight="1"
+          color="black"
+        >
           {productName}
         </Text>
       </VStack>
@@ -46,7 +55,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
   const renderDescription = () => {
     return (
       <VStack>
-        <Text>
+        <Text fontSize={["sm", "sm", "sm", "md"]}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec et
           justo pharetra, fringilla urna eu, egestas nulla. Donec suscipit nibh
           vitae odio fringilla placerat. Pellentesque habitant morbi tristique
@@ -64,7 +73,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
             ${price * (1 - discount)}
           </Text>
           <Badge
-            fontSize="md"
+            fontSize={["sm", "sm", "sm", "md"]}
             fontWeight="700"
             bgColor="paleorange"
             color="orange"
@@ -98,7 +107,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
     };
 
     return (
-      <Box w="56" h="100%">
+      <Box flexGrow="2" h="100%">
         <Button onClick={add} h="100%">
           <Image src="/images/icon-cart.svg" />
           <Text>Add To Cart</Text>
@@ -115,7 +124,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
         px="2"
         py="4"
         h="100%"
-        w="36"
+        flexGrow="1"
         borderRadius="8px"
         bgColor="grayishblue.100"
         fontSize="md"
@@ -141,22 +150,24 @@ const ProductDetail: FC<ProductDetailProps> = ({
   };
 
   return (
-    <VStack
-      w="100%"
-      h={["fit-content", "70vh"]}
-      justifyContent={["flex-start", "center"]}
-      alignItems="start"
-      spacing="4"
-      px={["3", "0"]}
-      pb="4"
-    >
-      {renderTitle()}
-      {renderDescription()}
-      {renderPrice()}
-      <HStack h="12" spacing="6">
-        {renderAmountButton()}
-        {renderCartButton()}
-      </HStack>
+    <VStack w="100%" alignItems="start">
+      <VStack
+        w="80%"
+        h={["fit-content", "70vh"]}
+        justifyContent={["flex-start", "center"]}
+        alignItems="start"
+        spacing="4"
+        px={["3", "0"]}
+        pb="4"
+      >
+        {renderTitle()}
+        {renderDescription()}
+        {renderPrice()}
+        <HStack h="12" w="100%" spacing="6">
+          {renderAmountButton()}
+          {renderCartButton()}
+        </HStack>
+      </VStack>
     </VStack>
   );
 };
