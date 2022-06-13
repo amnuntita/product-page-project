@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 
-import { VStack, Box, HStack, Text, Flex } from "@chakra-ui/layout";
+import { VStack, Box, HStack, Text, Flex, Grid } from "@chakra-ui/layout";
 import { Image, useMediaQuery } from "@chakra-ui/react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -49,76 +49,85 @@ const Gallery: FC<GalleryProps> = ({ imageList, openLightbox, ...props }) => {
       );
     };
 
-    return (
-      <HStack h="70%" w="100%" pos="relative">
-        {arrow("left")}
-        <Image
-          src={imageList[largeImgIdx]}
-          h="100%"
-          objectFit="contain"
-          borderRadius="16px"
-          cursor={openLightbox ? "pointer" : "default"}
-          onClick={() => {
-            if (openLightbox) {
-              openLightbox(imageList);
-            }
-          }}
-        />
-        {arrow("right")}
-      </HStack>
-    );
+    if (props.showArrow) {
+      return (
+        <HStack w="100%" gridColumn="1/-1" gridRow="1/2" pos="relative">
+          {arrow("left")}
+          <Image
+            src={imageList[largeImgIdx]}
+            h="100%"
+            objectFit="contain"
+            borderRadius="16px"
+            cursor={openLightbox ? "pointer" : "default"}
+            onClick={() => {
+              if (openLightbox) {
+                openLightbox(imageList);
+              }
+            }}
+          />
+          {arrow("right")}
+        </HStack>
+      );
+    } else {
+      return (
+        <Box gridColumn="1/-1" gridRow="1/2" h="100%" bgColor="green">
+          <Image
+            h="100%"
+            src={imageList[largeImgIdx]}
+            objectFit="contain"
+            borderRadius={["0", "16px"]}
+            cursor={openLightbox && !isMobile ? "pointer" : "default"}
+            onClick={() => {
+              if (openLightbox && !isMobile) {
+                openLightbox(imageList);
+              }
+            }}
+          />
+        </Box>
+      );
+    }
   };
 
   const renderThumbnails = () => {
-    return (
-      <HStack
-        justifyContent="space-between"
-        h="20%"
-        w="100%"
-        display={["none", "flex"]}
-      >
-        {imageList.map((img, idx) => {
-          const activeStyle =
-            idx === largeImgIdx
-              ? {
-                  border: "3px solid orange",
-                  opacity: "0.5",
-                }
-              : {};
-          return (
-            <Image
-              boxSize="90px"
-              src={img}
-              borderRadius="8px"
-              cursor="pointer"
-              onClick={() => setLargeImgIdx(idx)}
-              {...activeStyle}
-            />
-          );
-        })}
-      </HStack>
-    );
+    return imageList.map((img, idx) => {
+      const activeStyle =
+        idx === largeImgIdx
+          ? {
+              border: "3px solid orange",
+              opacity: "0.5",
+            }
+          : {};
+      return (
+        <Image
+          gridColumn={`${idx + 1}/${idx + 2}`}
+          gridRowStart="3"
+          key={img}
+          src={img}
+          borderRadius="8px"
+          cursor="pointer"
+          onClick={() => setLargeImgIdx(idx)}
+          boxSizing="border-box"
+          {...activeStyle}
+        />
+      );
+    });
   };
 
   return (
-    <VStack w="fit-content" spacing="4" h={props.h ?? "100%"}>
-      {props.showArrow ? (
-        renderLargeImage()
-      ) : (
-        <Image
-          src={imageList[largeImgIdx]}
-          h={["auto", "70%"]}
-          objectFit="contain"
-          borderRadius={["0", "16px"]}
-          cursor={openLightbox && !isMobile ? "pointer" : "default"}
-          onClick={() => {
-            if (openLightbox && !isMobile) {
-              openLightbox(imageList);
-            }
-          }}
-        />
-      )}
-      {renderThumbnails()}
+    // <VStack w="fit-content" spacing="4" h={props.h ?? "100%"} bgColor="red.100">
+    //   {renderLargeImage()}
+    //   {renderThumbnails()}
+    // </VStack>
+    <VStack h={["auto", "100%"]} bgColor="red" alignContent="center">
+      <Grid
+        boxSize={["100%", "80%"]}
+        gridTemplateColumns="repeat(4,1fr)"
+        gridRowGap="4"
+        gridColumnGap="5"
+      >
+        {renderLargeImage()}
+        {!isMobile && renderThumbnails()}
+      </Grid>
     </VStack>
   );
 };
