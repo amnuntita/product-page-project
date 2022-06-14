@@ -13,17 +13,18 @@ export interface GalleryProps {
   h?: string;
   showArrow?: boolean;
   isLightbox?: boolean;
+  closeLightbox?: Function;
 }
 
 const Gallery: FC<GalleryProps> = ({
   imageList,
   openLightbox,
+  closeLightbox,
   isLightbox = false,
   ...props
 }) => {
   const [largeImgIdx, setLargeImgIdx] = useState(0);
   const [isMobile] = useMediaQuery("(max-width: 500px)");
-  const { close } = useLightbox();
 
   const renderLargeImage = () => {
     const arrow = (dir: "left" | "right") => {
@@ -32,17 +33,22 @@ const Gallery: FC<GalleryProps> = ({
           boxSize="40px"
           borderRadius="99px"
           bgColor="white"
-          zIndex="2"
-          pos="absolute"
-          left="0"
           justifyContent="center"
           alignItems="center"
           cursor="pointer"
           onClick={() => {
-            if (dir === "left" && largeImgIdx > 0) {
-              setLargeImgIdx((idx) => idx - 1);
-            } else if (dir === "right" && largeImgIdx < imageList.length - 1) {
-              setLargeImgIdx((idx) => idx + 1);
+            if (dir === "left" && largeImgIdx >= 0) {
+              if (largeImgIdx == 0) {
+                setLargeImgIdx(imageList.length - 1);
+              } else {
+                setLargeImgIdx((idx) => idx - 1);
+              }
+            } else if (dir === "right") {
+              if (largeImgIdx === imageList.length - 1) {
+                setLargeImgIdx(0);
+              } else {
+                setLargeImgIdx((idx) => idx + 1);
+              }
             }
           }}
         >
@@ -57,7 +63,31 @@ const Gallery: FC<GalleryProps> = ({
 
     if (props.showArrow) {
       return (
-        <HStack w={isLightbox ? "90%" : "100%"} pos="relative">
+        <VStack w={isLightbox ? "90%" : "100%"} pos="relative">
+          {isLightbox && (
+            <CloseIcon
+              color="white"
+              cursor="pointer"
+              onClick={() =>
+                closeLightbox ? closeLightbox() : console.log("to close")
+              }
+              alignSelf="flex-end"
+            />
+          )}
+
+          <HStack
+            pos="absolute"
+            zIndex="2"
+            marginTop="0"
+            top="50%"
+            px={isMobile ? "2" : "0"}
+            w={isMobile ? "100%" : "110%"}
+            justifyContent="space-between"
+          >
+            {arrow("left")}
+            {arrow("right")}
+          </HStack>
+
           <Image
             src={imageList[largeImgIdx]}
             w="100%"
@@ -70,7 +100,7 @@ const Gallery: FC<GalleryProps> = ({
               }
             }}
           />
-        </HStack>
+        </VStack>
       );
     } else {
       return (
@@ -129,7 +159,6 @@ const Gallery: FC<GalleryProps> = ({
       boxSize={isLightbox ? "70%" : "100%"}
       alignContent="center"
       justifyContent="center"
-      h={props.h ?? "100%"}
       spacing="4"
     >
       {renderLargeImage()}
