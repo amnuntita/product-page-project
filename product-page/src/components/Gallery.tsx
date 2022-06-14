@@ -7,6 +7,8 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { ReactComponent as NextIcon } from "../svg/icon-next.svg";
 import { ReactComponent as PrevIcon } from "../svg/icon-previous.svg";
 
+import useDevice from "../hooks/useDevice";
+
 export interface GalleryProps {
   imageList: string[];
   openLightbox?: (imgList: string[]) => void;
@@ -24,7 +26,7 @@ const Gallery: FC<GalleryProps> = ({
   ...props
 }) => {
   const [largeImgIdx, setLargeImgIdx] = useState(0);
-  const [isMobile] = useMediaQuery("(max-width: 500px)");
+  const { isSmallDevice, isDesktop } = useDevice();
 
   const renderLargeImage = () => {
     const arrow = (dir: "left" | "right") => {
@@ -52,7 +54,25 @@ const Gallery: FC<GalleryProps> = ({
             }
           }}
         >
-          {dir === "left" ? <PrevIcon /> : <NextIcon />}
+          {dir === "left" ? (
+            <Box
+              stroke="black"
+              _hover={{
+                stroke: "orange",
+              }}
+            >
+              <PrevIcon />
+            </Box>
+          ) : (
+            <Box
+              stroke="black"
+              _hover={{
+                stroke: "orange",
+              }}
+            >
+              <NextIcon />
+            </Box>
+          )}
         </Flex>
       );
     };
@@ -68,6 +88,9 @@ const Gallery: FC<GalleryProps> = ({
                 closeLightbox ? closeLightbox() : console.log("to close")
               }
               alignSelf="flex-end"
+              _hover={{
+                color: "orange",
+              }}
             />
           )}
 
@@ -76,8 +99,8 @@ const Gallery: FC<GalleryProps> = ({
             zIndex="2"
             marginTop="0"
             top="50%"
-            px={isMobile ? "2" : "0"}
-            w={isMobile ? "100%" : "110%"}
+            px={isSmallDevice ? "2" : "0"}
+            w={isSmallDevice ? "100%" : "110%"}
             justifyContent="space-between"
           >
             {arrow("left")}
@@ -105,9 +128,9 @@ const Gallery: FC<GalleryProps> = ({
           src={imageList[largeImgIdx]}
           objectFit="contain"
           borderRadius={["0", "16px"]}
-          cursor={openLightbox && !isMobile ? "pointer" : "default"}
+          cursor={openLightbox && isDesktop ? "pointer" : "default"}
           onClick={() => {
-            if (openLightbox && !isMobile) {
+            if (openLightbox && isDesktop) {
               openLightbox(imageList);
             }
           }}
@@ -138,6 +161,9 @@ const Gallery: FC<GalleryProps> = ({
                 onClick={() => setLargeImgIdx(idx)}
                 boxSizing="border-box"
                 {...activeStyle}
+                _hover={{
+                  opacity: 0.5,
+                }}
               />
             </Box>
           );
@@ -154,7 +180,7 @@ const Gallery: FC<GalleryProps> = ({
       spacing="4"
     >
       {renderLargeImage()}
-      {!isMobile && renderThumbnails()}
+      {isDesktop && renderThumbnails()}
     </VStack>
   );
 };

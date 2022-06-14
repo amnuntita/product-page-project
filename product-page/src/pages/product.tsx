@@ -10,6 +10,7 @@ import ProductDetail from "../components/ProductDetail";
 import Lightbox from "../components/Lightbox";
 
 import useLightbox from "../hooks/useLightbox";
+import useDevice from "../hooks/useDevice";
 
 const images = [
   "/images/image-product-1.jpg",
@@ -28,14 +29,14 @@ const productDetail = {
 
 const ProductPage = () => {
   const { isShowing, open, close, imageList } = useLightbox();
-  const [isMobile] = useMediaQuery("(max-width: 500px)");
+  const { isSmallDevice } = useDevice();
 
   return (
     <>
       <Container>
         <Content>
           <VStack w="100%" alignContent="center">
-            {isMobile ? (
+            {isSmallDevice ? (
               <Gallery imageList={images} showArrow={true} />
             ) : (
               <Gallery imageList={images} openLightbox={open} />
