@@ -5,7 +5,13 @@ import Topbar from "./Topbar";
 
 const Container: FC = ({ children }) => {
   return (
-    <VStack w="100%" minH="100vh" px={["0", "40"]} py={["4", "10"]} spacing="8">
+    <VStack
+      w="100%"
+      minH="100vh"
+      px={["0", "15vw"]}
+      py={["4", "5vh"]}
+      spacing="8"
+    >
       <Topbar />
       {children}
     </VStack>
