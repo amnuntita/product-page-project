@@ -3,7 +3,9 @@ import { FC, useState } from "react";
 import { VStack, Box, HStack, Text, Flex, Grid } from "@chakra-ui/layout";
 import { Image, useMediaQuery } from "@chakra-ui/react";
 
-import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
+import { ReactComponent as NextIcon } from "../svg/icon-next.svg";
+import { ReactComponent as PrevIcon } from "../svg/icon-previous.svg";
 
 export interface GalleryProps {
   imageList: string[];
@@ -50,11 +52,7 @@ const Gallery: FC<GalleryProps> = ({
             }
           }}
         >
-          {dir === "left" ? (
-            <ChevronLeftIcon boxSize="1.75rem" />
-          ) : (
-            <ChevronRightIcon boxSize="1.75rem" />
-          )}
+          {dir === "left" ? <PrevIcon /> : <NextIcon />}
         </Flex>
       );
     };

@@ -2,13 +2,15 @@ import { useState, FC } from "react";
 
 import { VStack, HStack, Text, Box } from "@chakra-ui/layout";
 import { Badge } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/image";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { ReactComponent as CartIcon } from "../svg/icon-cart.svg";
+import { ReactComponent as MinusIcon } from "../svg/icon-minus.svg";
+import { ReactComponent as PlusIcon } from "../svg/icon-plus.svg";
 
 import Button from "../components/AppButton";
 
 import { useCart } from "../context/Cart";
 import { addItem } from "../context/cartReducer";
+import { pointer } from "@testing-library/user-event/dist/types/pointer";
 
 interface ProductDetailProps {
   productID: string;
@@ -109,7 +111,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
     return (
       <Box w="50%" h="100%">
         <Button onClick={add} h="100%">
-          <Image src="/images/icon-cart.svg" fill="white" />
+          <CartIcon fill="white" />
           <Text>Add To Cart</Text>
         </Button>
       </Box>
@@ -131,19 +133,19 @@ const ProductDetail: FC<ProductDetailProps> = ({
         fontWeight="extrabold"
       >
         <MinusIcon
-          cursor="pointer"
           onClick={() => {
             if (amount >= 1) {
               setAmount((prev) => prev - 1);
             }
           }}
-          color="orange"
+          fill="orange"
+          style={{ cursor: "pointer" }}
         />
         <Text>{amount}</Text>
-        <AddIcon
-          cursor="pointer"
+        <PlusIcon
           onClick={() => setAmount((prev) => prev + 1)}
-          color="orange"
+          fill="orange"
+          style={{ cursor: "pointer" }}
         />
       </HStack>
     );

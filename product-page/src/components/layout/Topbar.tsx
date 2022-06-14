@@ -4,6 +4,7 @@ import { HStack, VStack, Divider, Text, Box, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import { Avatar } from "@chakra-ui/avatar";
 import { HamburgerIcon, Icon } from "@chakra-ui/icons";
+import { ReactComponent as CartIcon } from "../../svg/icon-cart.svg";
 
 import Logo from "./Logo";
 import CartBox from "../CartBox";
@@ -37,11 +38,10 @@ const Topbar = () => {
   const renderCartIcon = () => {
     return (
       <Box pos="relative">
-        <Image
-          src="/images/icon-cart.svg"
-          cursor="pointer"
-          w="5"
+        <CartIcon
           onClick={() => setIsCartShowing((prev) => !prev)}
+          style={{ cursor: "pointer" }}
+          fill="gray"
         />
 
         {totalAmount > 0 && (

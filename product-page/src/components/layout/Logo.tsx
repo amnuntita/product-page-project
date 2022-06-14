@@ -1,10 +1,12 @@
 import { Image } from "@chakra-ui/image";
 import { Box } from "@chakra-ui/layout";
 
+import { ReactComponent as LogoSVG } from "../../svg/logo.svg";
+
 const Logo = () => {
   return (
     <Box>
-      <Image src="/images/logo.svg" w="100%" />
+      <LogoSVG />
     </Box>
   );
 };
