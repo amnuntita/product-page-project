@@ -29,7 +29,12 @@ const Lightbox: FC<LightboxProps> = ({ isShowing, close, imageList }) => {
         h="100%"
       >
         <VStack justifyContent="center" boxSize="100%" spacing="4">
-          <VStack w="50%" h="100%" justifyContent="center">
+          <VStack
+            w="50%"
+            h="100%"
+            justifyContent="center"
+            alignContent="center"
+          >
             <CloseIcon
               color="white"
               cursor="pointer"

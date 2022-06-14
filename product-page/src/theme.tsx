@@ -5,6 +5,14 @@ const fonts = {
   heading: "Kumbh Sans",
 };
 
+const breakpoints = {
+  sm: "950px",
+  md: "1000px",
+  lg: "1100px",
+  xl: "1200px",
+  "2xl": "1536px",
+};
+
 const theme = extendTheme({
   colors: {
     orange: "hsl(26, 100%, 55%)",
@@ -47,6 +55,7 @@ const theme = extendTheme({
       },
     },
   },
+  breakpoints,
 });
 
 export default theme;

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { HStack, VStack, Divider, Text, Box, Flex } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/image";
 import { Avatar } from "@chakra-ui/avatar";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, Icon } from "@chakra-ui/icons";
 
 import Logo from "./Logo";
 import CartBox from "../CartBox";
@@ -20,7 +20,11 @@ const Topbar = () => {
 
   const renderNavLink = () => {
     return (
-      <HStack spacing="8" display={["none", "flex", "flex"]} cursor="pointer">
+      <HStack
+        spacing={["4", "4", "4", "8"]}
+        display={["none", "flex", "flex"]}
+        cursor="pointer"
+      >
         <Text>Collections</Text>
         <Text>Men</Text>
         <Text>Women</Text>
@@ -36,10 +40,10 @@ const Topbar = () => {
         <Image
           src="/images/icon-cart.svg"
           cursor="pointer"
-          boxSize="5"
-          pos="relative"
+          w="5"
           onClick={() => setIsCartShowing((prev) => !prev)}
         />
+
         {totalAmount > 0 && (
           <Flex
             borderRadius="99px"
@@ -64,18 +68,18 @@ const Topbar = () => {
 
   const renderUserMenu = () => {
     return (
-      <>
-        <HStack h="100%" alignItems="center" spacing="6" pos="relative">
+      <Box>
+        <HStack h="100%" alignItems="center" spacing="6" margin="0">
           {renderCartIcon()}
           <Avatar
             name="Dan Abrahmov"
             src="https://bit.ly/dan-abramov"
             cursor="pointer"
-            boxSize={["6", "12"]}
+            boxSize={["6", "8", "8", "12"]}
           />
         </HStack>
         {isCartShowing && <CartBox />}
-      </>
+      </Box>
     );
   };
 
@@ -88,8 +92,8 @@ const Topbar = () => {
       <HStack
         w="100%"
         h="10"
-        alignItems={["center", "start"]}
-        spacing={["4", "20"]}
+        alignItems={["center", "center"]}
+        spacing={["4", "10", "10", "20"]}
         px={["4", "0"]}
       >
         <HStack>
@@ -101,9 +105,10 @@ const Topbar = () => {
           />
           <Logo />
         </HStack>
-        {renderNavLink()}
-        <Box flexGrow="1" />
-        {renderUserMenu()}
+        <HStack w="100%" justifyContent={["flex-end", "space-between"]}>
+          {renderNavLink()}
+          {renderUserMenu()}
+        </HStack>
       </HStack>
       <Divider display={["none", "initial"]} />
       {isDrawerOpening && (
