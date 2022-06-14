@@ -22,7 +22,7 @@ const CartBox = () => {
         <VStack fontSize="sm" spacing="0.5" alignItems="flex-start">
           <Text>{itemName}</Text>
           <Text>
-            ${price} x {amount} ${price * amount}
+            ${price} x {amount} <b color="black">${price * amount}</b>
           </Text>
         </VStack>
         <Image

@@ -107,9 +107,9 @@ const ProductDetail: FC<ProductDetailProps> = ({
     };
 
     return (
-      <Box flexGrow="2" h="100%">
+      <Box w="50%" h="100%">
         <Button onClick={add} h="100%">
-          <Image src="/images/icon-cart.svg" />
+          <Image src="/images/icon-cart.svg" fill="white" />
           <Text>Add To Cart</Text>
         </Button>
       </Box>
@@ -124,7 +124,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
         px="2"
         py="4"
         h="100%"
-        flexGrow="1"
+        w="30%"
         borderRadius="8px"
         bgColor="grayishblue.100"
         fontSize="md"
@@ -152,7 +152,7 @@ const ProductDetail: FC<ProductDetailProps> = ({
   return (
     <VStack w="100%" alignItems="start">
       <VStack
-        w="80%"
+        w="90%"
         h={["fit-content", "70vh"]}
         justifyContent={["flex-start", "center"]}
         alignItems="start"

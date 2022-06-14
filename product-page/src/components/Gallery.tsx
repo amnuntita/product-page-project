@@ -5,8 +5,6 @@ import { Image, useMediaQuery } from "@chakra-ui/react";
 
 import { ChevronLeftIcon, ChevronRightIcon, CloseIcon } from "@chakra-ui/icons";
 
-import useLightbox from "../hooks/useLightbox";
-
 export interface GalleryProps {
   imageList: string[];
   openLightbox?: (imgList: string[]) => void;
@@ -151,10 +149,6 @@ const Gallery: FC<GalleryProps> = ({
   };
 
   return (
-    // <VStack w="fit-content" spacing="4" h={props.h ?? "100%"} bgColor="red.100">
-    //   {renderLargeImage()}
-    //   {renderThumbnails()}
-    // </VStack>
     <VStack
       boxSize={isLightbox ? "70%" : "100%"}
       alignContent="center"
