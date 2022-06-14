@@ -20,17 +20,27 @@ const Topbar = () => {
   const [isDrawerOpening, setIsDrawerOpening] = useState(false);
 
   const renderNavLink = () => {
+    const text = ["Collections", "Men", "Women", "About", "Contact"];
+
     return (
       <HStack
         spacing={["4", "4", "4", "8"]}
         display={["none", "flex", "flex"]}
         cursor="pointer"
+        alignContent="start"
+        h="100%"
       >
-        <Text>Collections</Text>
-        <Text>Men</Text>
-        <Text>Women</Text>
-        <Text>About</Text>
-        <Text>Contact</Text>
+        {text.map((t) => (
+          <Box
+            h="100%"
+            _hover={{
+              borderBottomColor: "orange",
+              borderBottomWidth: "thick",
+            }}
+          >
+            <Text>{t}</Text>
+          </Box>
+        ))}
       </HStack>
     );
   };
@@ -75,7 +85,7 @@ const Topbar = () => {
             name="Dan Abrahmov"
             src="https://bit.ly/dan-abramov"
             cursor="pointer"
-            boxSize={["6", "8", "8", "12"]}
+            boxSize={["6", "8", "8", "10"]}
           />
         </HStack>
         {isCartShowing && <CartBox />}
@@ -91,10 +101,12 @@ const Topbar = () => {
     <>
       <HStack
         w="100%"
-        h="10"
-        alignItems={["center", "center"]}
+        h="16"
+        alignItems={["center", "start"]}
         spacing={["4", "10", "10", "20"]}
         px={["4", "0"]}
+        borderBottomColor="gray.200"
+        borderBottomWidth="thin"
       >
         <HStack>
           <HamburgerIcon
@@ -105,12 +117,17 @@ const Topbar = () => {
           />
           <Logo />
         </HStack>
-        <HStack w="100%" justifyContent={["flex-end", "space-between"]}>
+        <HStack
+          w="100%"
+          justifyContent={["flex-end", "space-between"]}
+          alignItems="start"
+          h="100%"
+        >
           {renderNavLink()}
           {renderUserMenu()}
         </HStack>
       </HStack>
-      <Divider display={["none", "initial"]} />
+
       {isDrawerOpening && (
         <DrawerNav
           isOpen={isDrawerOpening}
