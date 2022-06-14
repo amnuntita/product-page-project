@@ -7,7 +7,7 @@ import Gallery from "./Gallery";
 
 interface LightboxProps {
   isShowing: boolean;
-  close: Function;
+  close?: Function;
   imageList: string[];
 }
 
@@ -28,20 +28,20 @@ const Lightbox: FC<LightboxProps> = ({ isShowing, close, imageList }) => {
         w="100%"
         h="100%"
       >
-        <VStack justifyContent="center" boxSize="100%" spacing="4">
+        <VStack justifyContent="center" boxSize="100%">
           <VStack
             w="50%"
             h="100%"
             justifyContent="center"
             alignContent="center"
+            spacing="0"
           >
-            <CloseIcon
-              color="white"
-              cursor="pointer"
-              onClick={() => close()}
-              marginLeft="60%"
+            <Gallery
+              imageList={imageList}
+              showArrow={true}
+              closeLightbox={close}
+              isLightbox={true}
             />
-            <Gallery imageList={imageList} showArrow={true} isLightbox={true} />
           </VStack>
         </VStack>
       </VStack>
