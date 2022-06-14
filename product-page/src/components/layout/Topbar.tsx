@@ -120,7 +120,7 @@ const Topbar = () => {
         <HStack
           w="100%"
           justifyContent={["flex-end", "space-between"]}
-          alignItems="start"
+          alignItems={["center", "start"]}
           h="100%"
         >
           {renderNavLink()}

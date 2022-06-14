@@ -9,7 +9,7 @@ const Container: FC = ({ children }) => {
       w="100%"
       minH="100vh"
       px={["0", "15vw"]}
-      py={["4", "5vh"]}
+      py={["2", "5vh"]}
       spacing="8"
     >
       <Topbar />
