@@ -1,4 +1,3 @@
-import { Image } from "@chakra-ui/image";
 import { Box } from "@chakra-ui/layout";
 
 import { ReactComponent as LogoSVG } from "../../svg/logo.svg";

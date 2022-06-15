@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 
-import { VStack, Box, HStack, Text, Flex, Grid } from "@chakra-ui/layout";
-import { Image, useMediaQuery } from "@chakra-ui/react";
+import { VStack, Box, HStack, Flex } from "@chakra-ui/layout";
+import { Image } from "@chakra-ui/image";
 
 import { CloseIcon } from "@chakra-ui/icons";
 import { ReactComponent as NextIcon } from "../svg/icon-next.svg";

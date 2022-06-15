@@ -10,7 +10,6 @@ import Button from "../components/AppButton";
 
 import { useCart } from "../context/Cart";
 import { addItem } from "../context/cartReducer";
-import { pointer } from "@testing-library/user-event/dist/types/pointer";
 
 interface ProductDetailProps {
   productID: string;

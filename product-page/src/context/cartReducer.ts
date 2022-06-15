@@ -1,4 +1,4 @@
-import { useReducer, useCallback } from "react";
+import { useReducer } from "react";
 import { CartItem, CartState } from "./Cart";
 
 const initialState: CartState = { items: [], totalAmount: 0 };

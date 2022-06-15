@@ -1,7 +1,6 @@
 import { FC } from "react";
 
-import { VStack, HStack, Box, Text } from "@chakra-ui/layout";
-import { CloseIcon } from "@chakra-ui/icons";
+import { VStack } from "@chakra-ui/layout";
 
 import Gallery from "./Gallery";
 

@@ -1,7 +1,4 @@
-import { useState } from "react";
-
 import { VStack } from "@chakra-ui/layout";
-import { useMediaQuery } from "@chakra-ui/react";
 
 import Container from "../components/layout/Container";
 import Content from "../components/layout/Content";

@@ -5,8 +5,6 @@ import {
   DrawerProps,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
   DrawerBody,
 } from "@chakra-ui/react";
 import { VStack, Text, Box } from "@chakra-ui/layout";

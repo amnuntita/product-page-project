@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import { HStack, VStack, Divider, Text, Box, Flex } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/image";
+import { HStack, Text, Box, Flex } from "@chakra-ui/layout";
 import { Avatar } from "@chakra-ui/avatar";
-import { HamburgerIcon, Icon } from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { ReactComponent as CartIcon } from "../../svg/icon-cart.svg";
 
 import Logo from "./Logo";

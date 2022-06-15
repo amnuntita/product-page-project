@@ -1,5 +1,5 @@
-import React, { FC, useReducer, useCallback, useMemo } from "react";
-import { cartReducer, useCartReducer } from "./cartReducer";
+import React, { FC } from "react";
+import { useCartReducer } from "./cartReducer";
 
 export interface CartItem {
   itemID: string;
